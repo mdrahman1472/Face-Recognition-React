@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Courier New', sans-serif;
-  background: linear-gradient(89deg, #FBAB7E 0%, #F7CE68 100%);
-  /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
+  /* background: linear-gradient(89deg, #FBAB7E 0%, #F7CE68 100%); */
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
 }
 
