@@ -1,0 +1,37 @@
+.img-size {
+   width: 500px;
+   height: auto;
+}
+
+.bounding-box {
+   position: absolute;
+   box-shadow: 0 0 0 3px #149df2 inset;
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-wrap: wrap;
+   flex-wrap: wrap;
+   -ms-flex-pack: center;
+   justify-content: center;
+   cursor: pointer;
+}
+
+.concepts {
+   position: absolute;
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-wrap: wrap;
+   flex-wrap: wrap;
+   -ms-flex-pack: center;
+   justify-content: left;
+   top: 0;
+   right: 0px;
+   bottom: auto;
+   left: 388px;
+}
+.bg-concepts {
+   background-color: rgba(0, 0, 0, 0.4);
+}
+.list {
+   padding: 10px;
+   font-family: sans-serif;
+}
