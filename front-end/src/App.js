@@ -3,6 +3,7 @@ import './App.css';
 import Particles from 'react-particles-js';
 import { Navigation } from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
+import Signin from './components/Signin/Signin';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import ImageWithPrediction from './components/ImageWithPrediction/ImageWithPrediction';
@@ -28,6 +29,7 @@ class App extends Component {
          imgUrl: '',
          box: {},
          concepts: {},
+         route: 'signin',
       }
    }
 
@@ -68,25 +70,33 @@ class App extends Component {
       .catch(err => {
         console.log(err);
       });
+   }
 
+   onRouteChange = (route) => {
+      this.setState({route: route})
    }
 
    render() {
       return (
          <div className="App">
             <Particles className="particles" params={particlesParam}/>
-            <Navigation />
-            <Logo />
-            <Rank />
-            <ImageLinkForm 
-               onChangeInput = {this.onChangeInput}
-               onClickEvent = {this.onClickEvent}
-            />
-            <ImageWithPrediction
-               imgSrc={this.state.imgUrl}
-               box={this.state.box}
-               concepts={this.state.concepts}
-            />
+            { this.state.route === 'signin'
+            ? <Signin onRouteChange={this.onRouteChange} />
+            : <div>
+                  <Navigation onRouteChange={this.onRouteChange}/>
+                  <Logo />
+                  <Rank />
+                  <ImageLinkForm 
+                     onChangeInput = {this.onChangeInput}
+                     onClickEvent = {this.onClickEvent}
+                  />
+                  <ImageWithPrediction
+                     imgSrc={this.state.imgUrl}
+                     box={this.state.box}
+                     concepts={this.state.concepts}
+                  />
+               </div>
+            }
          </div>
       );
    }
