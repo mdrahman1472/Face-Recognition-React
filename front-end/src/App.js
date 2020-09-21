@@ -4,6 +4,7 @@ import Particles from 'react-particles-js';
 import { Navigation } from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import ImageWithPrediction from './components/ImageWithPrediction/ImageWithPrediction';
@@ -30,6 +31,7 @@ class App extends Component {
          box: {},
          concepts: {},
          route: 'signin',
+         isSignedIn: false,
       }
    }
 
@@ -50,7 +52,6 @@ class App extends Component {
       const conceptsGender = clarifiConcepts[20].name === 'masculine' ? 'male' : 'female';
       const concepts = {
          age: clarifiConcepts[0].name,
-         // gender: conceptsGender.toUpperCase(),
          gender: conceptsGender,
          race: clarifiConcepts[22].name
       }
@@ -73,6 +74,11 @@ class App extends Component {
    }
 
    onRouteChange = (route) => {
+      if (route === 'signout') {
+         this.setState({isSignedIn: false})
+       } else if (route === 'home') {
+         this.setState({isSignedIn: true})
+       }
       this.setState({route: route})
    }
 
@@ -80,22 +86,26 @@ class App extends Component {
       return (
          <div className="App">
             <Particles className="particles" params={particlesParam}/>
-            { this.state.route === 'signin'
-            ? <Signin onRouteChange={this.onRouteChange} />
-            : <div>
-                  <Navigation onRouteChange={this.onRouteChange}/>
-                  <Logo />
-                  <Rank />
-                  <ImageLinkForm 
-                     onChangeInput = {this.onChangeInput}
-                     onClickEvent = {this.onClickEvent}
-                  />
-                  <ImageWithPrediction
-                     imgSrc={this.state.imgUrl}
-                     box={this.state.box}
-                     concepts={this.state.concepts}
-                  />
-               </div>
+            <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+            { this.state.route === 'home'
+            ? <div>
+               <Logo />
+               <Rank />
+               <ImageLinkForm 
+                  onChangeInput = {this.onChangeInput}
+                  onClickEvent = {this.onClickEvent}
+               />
+               <ImageWithPrediction
+                  imgSrc={this.state.imgUrl}
+                  box={this.state.box}
+                  concepts={this.state.concepts}
+               />
+            </div>
+            : (
+               this.state.route === 'signin'
+               ? <Signin onRouteChange={this.onRouteChange} />
+               : <Register onRouteChange={this.onRouteChange}/>
+            ) 
             }
          </div>
       );
